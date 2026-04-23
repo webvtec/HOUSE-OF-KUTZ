@@ -539,16 +539,14 @@
 <!-- Header -->
 <div class="header-bar">
   <button class="menu-button" onclick="toggleMenu()">☰</button>
-  <div class="header-title">HOUSE OF KUTZ <span class="scissors">✂</span></div>
+  <div class="header-title">HOUSE OF CUTZ <span class="scissors">✂</span></div>
   <a class="location-button" href="https://maps.app.goo.gl/YuDnPRUrxBcQqV4c9" target="_blank">📍</a>
 </div>
 
 <!-- Gallery Section -->
 <div class="content-section active" id="gallerySection">
-  <div style="text-align:center; padding-top: 90px; padding-bottom: 0;">
+  <div style="text-align:left; padding-top: 90px; padding-bottom: 20px; padding-left: 20px;">
     <img src="https://res.cloudinary.com/dqqr9udcs/image/upload/v1776902739/IMG-20260422-WA0049_cju7wv.jpg" alt="House of Kutz Logo" style="width: 160px; height: 160px; object-fit: cover; border-radius: 50%; border: 3px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.5); background: #0f0f0f;">
-    <h1 style="font-family:'Bebas Neue',cursive; font-size: 54px; letter-spacing: 5px; color: var(--cream); margin: 12px 0 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">HOUSE OF KUTZ</h1>
-    <div style="width: 80px; height: 3px; background: var(--accent); margin: 0 auto 20px;"></div>
   </div>
   <div id="galleryDisplay"></div>
 </div>
@@ -1037,7 +1035,7 @@ const firebaseConfig = {
       });
 
       if (Object.keys(categories).length === 0) {
-        galleryContainer.innerHTML = '<p style="text-align:center; margin-top:60px; color:#f5ead3; font-size:16px; text-shadow:0 1px 4px rgba(0,0,0,0.8);">No cuts in the gallery yet. Check back soon!</p>';
+        galleryContainer.innerHTML = '';
         return;
       }
 
