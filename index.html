@@ -642,7 +642,7 @@
 
 <!-- Booking Section -->
 <div class="content-section" id="bookingSection">
-  <h1>BOOK YOUR CUT</h1>
+  <h1 style="color:#ffffff;">BOOK YOUR CUT</h1>
   <div style="max-width:420px; margin:0 auto 16px; background:#1a1a1a; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; font-size:13px; color:#ccc; line-height:1.6;">
     📅 <strong style="color:var(--accent);">Appointments:</strong> Tuesday – Sunday<br>
     🚶 <strong style="color:var(--accent);">Walk-ins:</strong> Tuesday – Sunday<br>
@@ -723,7 +723,7 @@
 
 <!-- Reviews Section -->
 <div class="content-section" id="reviewsSection">
-  <h1 style="font-family:'Bebas Neue',cursive; letter-spacing:2px; color:var(--primary);">CLIENT REVIEWS</h1>
+  <h1 style="font-family:'Bebas Neue',cursive; letter-spacing:2px; color:#ffffff;">CLIENT REVIEWS</h1>
   <div id="reviewPrompt" style="display:none; max-width:500px; margin:20px auto; background-color:#f5f0e8; color:#444; border:1px solid var(--accent); border-radius:6px; padding:15px; text-align:center; font-weight:500;">
     How was your cut? Leave us a review!
   </div>
@@ -986,6 +986,9 @@ const firebaseConfig = {
       closeMenu();
     } else {
       menu.classList.add("show");
+      // Hide home action buttons while sidebar is open
+      const btns = document.getElementById("homeActionButtons");
+      if (btns) btns.style.display = "none";
       document.addEventListener("click", outsideClickHandler);
     }
 
@@ -999,6 +1002,12 @@ const firebaseConfig = {
 
   function closeMenu() {
     document.getElementById("menu").classList.remove("show");
+    // Restore home action buttons only if we're on the gallery (home) section
+    const btns = document.getElementById("homeActionButtons");
+    const gallery = document.getElementById("gallerySection");
+    if (btns && gallery && gallery.classList.contains("active")) {
+      btns.style.display = "flex";
+    }
   }
 
   function showSection(sectionId) {
