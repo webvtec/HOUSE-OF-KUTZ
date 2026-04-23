@@ -532,6 +532,32 @@
   }
 
   .menu-action-btn:hover { background-color: var(--accent); color: var(--cream); }
+
+  /* Sidebar HOME PAGE button - featured top-of-menu link */
+  .home-page-btn {
+    display: block;
+    text-align: center;
+    margin: 14px auto 18px;
+    padding: 13px 16px;
+    width: 90%;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 19px;
+    letter-spacing: 3px;
+    color: var(--cream);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.1);
+    transition: all 0.2s ease;
+  }
+
+  .home-page-btn:hover {
+    background: linear-gradient(135deg, var(--accent2) 0%, #4a0a0e 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
 </style>
 </head>
 <body>
@@ -558,7 +584,7 @@
 
 <!-- Side Menu -->
 <div class="menu" id="menu">
-  <a onclick="showSection('homeSection'); closeMenu();">🏠 HOME PAGE</a>
+  <a class="home-page-btn" onclick="showSection('homeSection'); closeMenu();">HOME PAGE</a>
   <a onclick="showSection('walkInPriceSection'); closeMenu();">💰 Appointment Price List</a>
 
   <div class="opening-hours">
