@@ -533,6 +533,11 @@
 
   .menu-action-btn:hover { background-color: var(--accent); color: var(--cream); }
 
+  /* Price List page specific background */
+  body.price-list-bg {
+    background-image: url('https://res.cloudinary.com/dqqr9udcs/image/upload/v1776984381/WhatsApp_Image_2026-04-23_at_5.36.06_AM_1_c4wwel.jpg') !important;
+  }
+
   /* Sidebar HOME PAGE button - featured top-of-menu link */
   .home-page-btn {
     display: block;
@@ -589,8 +594,7 @@
 
   <div class="opening-hours">
     <h3>APPOINTMENTS &amp; WALK-INS:</h3>
-    <p>Tue – Sun: 6:30 AM – 7:00 PM</p>
-    <p style="color:#e74c3c; font-weight:bold;">Monday: CLOSED</p>
+    <p>Open Every Day: 8:00 AM – 9:00 PM</p>
   </div>
 
   <a class="menu-action-btn" onclick="showUserBookings(); closeMenu();" href="javascript:void(0);">MY BOOKINGS</a>
@@ -657,13 +661,13 @@
     <button onclick="closePaymentInfo()" style="position:sticky; top:0; right:0; float:right; background:#fff; border:none; font-size:24px; cursor:pointer; z-index:10001; color:#999;">✖</button>
     <h3 style="margin:10px 0 18px; color:#1a1a1a; text-align:center; font-family:'Bebas Neue',cursive; letter-spacing:2px;">PAYMENT INFO</h3>
     <div style="border:1px solid #ddd; border-radius:10px; padding:14px; background:white; box-shadow:0 2px 5px rgba(0,0,0,0.08); border-left:4px solid var(--accent); color:#000;">
-      <h3 style="margin-top:0; color:#000; font-size:17px; font-family:'Bebas Neue',cursive; letter-spacing:1px;">🏦 Sajicor Account Details</h3>
-      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>👤 First Name:</strong> </p>
-      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>👤 Last Name:</strong> </p>
-      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>🏦 Bank Name:</strong> </p>
-      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>🔢 Branch:</strong> </p>
-      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>💳 Account Type:</strong> SAVINGS</p>
-      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>🔢 Account Number:</strong> </p>
+      <h3 style="margin-top:0; color:#000; font-size:17px; font-family:'Bebas Neue',cursive; letter-spacing:1px;">🏦 Scotiabank Account Details</h3>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>👤 First Name:</strong> RICHARD</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>👤 Last Name:</strong> CUNNINGHAM</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>🏦 Bank Name:</strong> Scotiabank</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>🔢 Branch/Transit:</strong> 95505</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>💳 Account Type:</strong> CHEQUING</p>
+      <p style="margin:6px 0; font-size:14px; color:#000;"><strong>🔢 Account Number:</strong> 95505 000305129</p>
       <p style="margin:6px 0; font-size:14px; color:#000;"><strong>💱 Account Currency:</strong> JMD</p>
     </div>
   </div>
@@ -673,10 +677,9 @@
 <div class="content-section" id="bookingSection">
   <h1 style="color:#ffffff;">BOOK YOUR CUT</h1>
   <div style="max-width:420px; margin:0 auto 16px; background:#1a1a1a; border-left:4px solid var(--accent); border-radius:6px; padding:12px 16px; font-size:13px; color:#ccc; line-height:1.6;">
-    📅 <strong style="color:var(--accent);">Appointments:</strong> Tuesday – Sunday<br>
-    🚶 <strong style="color:var(--accent);">Walk-ins:</strong> Tuesday – Sunday<br>
-    🕡 <strong style="color:var(--accent);">Hours:</strong> 6:30 AM – 7:00 PM<br>
-    ⛔ <strong style="color:#e74c3c;">Closed:</strong> Monday<br>
+    📅 <strong style="color:var(--accent);">Appointments:</strong> Every Day<br>
+    🚶 <strong style="color:var(--accent);">Walk-ins:</strong> Every Day<br>
+    🕗 <strong style="color:var(--accent);">Hours:</strong> 8:00 AM – 9:00 PM<br>
     ⏱ <strong style="color:#e74c3c;">10-minute grace period</strong> — late arrivals lose their spot
   </div>
   <form onsubmit="submitBooking(event)">
@@ -694,22 +697,48 @@
       <option value="">COMPLETE FORM TO SEE AVAILABLE SLOTS</option>
     </select>
 
-    <!-- Haircut Age Group -->
-    <label for="ageGroup">Haircut:</label>
+    <!-- Service Type -->
+    <label for="ageGroup">Service Type:</label>
     <select id="ageGroup" onchange="onAgeGroupChange();">
-      <option value="NONE">NONE</option>
-      <option value="adult">ADULT CUT 18+</option>
-      <option value="teen">TEENAGER CUTS 13–17</option>
-      <option value="kids">KIDS CUTS 3–12</option>
+      <option value="NONE">— Select Service Type —</option>
+      <option value="package">💎 PACKAGE DEALS</option>
+      <option value="adult">👨 ADULTS</option>
+      <option value="teen">🧑 TEENS</option>
+      <option value="kids">🧒 KIDS</option>
     </select>
+
+    <!-- Package: picker -->
+    <div id="packageServiceWrap" style="display:none;">
+      <label for="packageService">Choose Package:</label>
+      <select id="packageService" onchange="onServiceChange();">
+        <option value="NONE">— Select a package —</option>
+        <option value="Platinum Package">💎 Platinum — $2,000</option>
+        <option value="Gold Package">🥇 Gold — $1,700</option>
+        <option value="Silver Package">🥈 Silver — $1,500</option>
+      </select>
+    </div>
 
     <!-- Adult: service picker -->
     <div id="adultServiceWrap" style="display:none;">
       <label for="adultService">Adult Service:</label>
       <select id="adultService" onchange="onServiceChange();">
         <option value="NONE">— Select a service —</option>
-        <option value="Adult Premium Cut">⭐ Premium Cut — $3,000</option>
-        <option value="Adult Regular Cut">✂ Regular Cut — $2,500</option>
+        <option value="Adult Trim n Shave">Trim n Shave — $1,500</option>
+        <option value="Adult Trim">Trim — $1,200</option>
+        <option value="Adult Shave Only">Shave Only — $800</option>
+        <option value="Adult Line Up Only">Line Up Only — $800</option>
+        <option value="Adult Line Up and Shave">Line Up and Shave — $1,000</option>
+        <option value="Adult Hot Towel Only">Hot Towel Only — $500</option>
+        <option value="Adult Trim Shave Hot Towel Beard Oil">Trim &amp; Shave + Hot Towel &amp; Beard Oil — $2,000</option>
+        <option value="Adult Trim Shave Spray Tint Hot Towel">Trim &amp; Shave + Spray Tint &amp; Hot Towel — $2,000</option>
+        <option value="Adult Eyebrow Tinting">Eyebrow Tinting — $1,200</option>
+        <option value="Adult Eyebrow">Eyebrow — $500</option>
+        <option value="Adult Ladies Kut">Ladies Kut — $1,200+</option>
+        <option value="Adult Ladies Scissors Kut">Ladies Scissors Kut — $2,000+</option>
+        <option value="Adult Designs">Designs — $800+</option>
+        <option value="Adult Spray Tint Hair Line">Spray Tint Hair Line — $500</option>
+        <option value="Adult Color Hair Only">Color Hair Only — $800</option>
+        <option value="Adult Color Hair and Beard">Color Hair and Beard — $1,500</option>
       </select>
     </div>
 
@@ -718,7 +747,20 @@
       <label for="teenService">Teen Service:</label>
       <select id="teenService" onchange="onServiceChange();">
         <option value="NONE">— Select a service —</option>
-        <option value="Teen Regular Cut">✂ Regular Cut — $2,000</option>
+        <option value="Teen Trim n Shave">Trim n Shave — $1,200</option>
+        <option value="Teen Trim">Trim — $1,000</option>
+        <option value="Teen Shave Only">Shave Only — $700</option>
+        <option value="Teen Line Up Only">Line Up Only — $700</option>
+        <option value="Teen Line Up and Shave">Line Up and Shave — $1,000</option>
+        <option value="Teen Hot Towel Only">Hot Towel Only — $500</option>
+        <option value="Teen Eyebrow">Eyebrow — $500</option>
+        <option value="Teen Eyebrow Tinting">Eyebrow Tinting — $1,200</option>
+        <option value="Teen Designs">Designs — $800+</option>
+        <option value="Teen Spray Tint Hair Line">Spray Tint Hair Line — $500</option>
+        <option value="Teen Ladies Kut">Ladies Kut — $1,200+</option>
+        <option value="Teen Ladies Scissors Kut">Ladies Scissors Kut — $2,000+</option>
+        <option value="Teen Color Hair Only">Color Hair Only — $800</option>
+        <option value="Teen Color Hair and Beard">Color Hair and Beard — $1,500</option>
       </select>
     </div>
 
@@ -727,7 +769,8 @@
       <label for="kidsService">Kids Service:</label>
       <select id="kidsService" onchange="onServiceChange();">
         <option value="NONE">— Select a service —</option>
-        <option value="Kids Cut">✂ Kids Cut — $1,500+</option>
+        <option value="Kids Boyz Kut">Boyz Kut — $1,000</option>
+        <option value="Kids Designs">Designs — $800+</option>
       </select>
     </div>
 
@@ -778,98 +821,122 @@
 <div class="content-section" id="walkInPriceSection">
   <h1 style="font-family:'Bebas Neue',cursive; letter-spacing:2px; color:var(--accent); text-align:center; margin-top:80px; font-size:30px;">Appointment Price List</h1>
   <div style="max-width:420px; margin:0 auto 24px; background:#1a1a1a; border-left:4px solid var(--accent); border-radius:6px; padding:10px 16px; font-size:13px; color:#ccc; line-height:1.6;">
-    📆 <strong style="color:var(--accent);">Appointments:</strong> Tue – Sun &nbsp;|&nbsp; 6:30 AM – 7:00 PM &nbsp;|&nbsp; Closed Mondays
+    📆 <strong style="color:var(--accent);">Appointments:</strong> Every Day &nbsp;|&nbsp; 8:00 AM – 9:00 PM
   </div>
 
   <div style="max-width:420px; margin:0 auto; padding:0 16px 80px;">
 
-    <!-- ========== REGULAR — ADULTS 18+ ========== -->
-    <div style="background:#fafafa; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(193,39,45,0.35); box-shadow:0 2px 6px rgba(0,0,0,0.06);">
-      <div style="background:var(--accent); padding:10px 16px;">
-        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:15px; color:#f5ead3;">✂ REGULAR — ADULTS 18+</span>
+    <!-- ========== PLATINUM PACKAGE ========== -->
+    <div style="background:#fafafa; border-radius:10px; overflow:hidden; margin-bottom:16px; border:2px solid #d4a24c; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+      <div style="background:linear-gradient(135deg, #4a4a4a 0%, #1a1a1a 100%); padding:14px 16px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:18px; color:#e5e4e2;">💎 PLATINUM</span>
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:1px; font-size:18px; color:#d4a24c;">$2,000</span>
       </div>
       <div style="padding:12px 16px;">
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">All Round Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Taper Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">One Level</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Bald Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Mohawk</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Flat Top</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Big Chop</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Buzz Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Low Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Skin Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,500</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim &amp; Shave</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Eyebrow</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
+        <div style="margin-bottom:6px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#d4a24c;">Package Includes</div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim n Shave</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Hot Towel</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Beard Oil</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Eyebrow</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Hair Products</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
+        <div style="margin-top:10px; margin-bottom:4px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">Optional Extras</div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Colour Beard Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Colour Hair Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
       </div>
     </div>
 
-    <!-- ========== PREMIUM — ADULTS 18+ ========== -->
-    <div style="background:#fafafa; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(193,39,45,0.35); box-shadow:0 2px 6px rgba(0,0,0,0.06);">
-      <div style="background:var(--accent); padding:10px 16px;">
-        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:15px; color:#f5ead3;">⭐ PREMIUM — ADULTS 18+</span>
+    <!-- ========== GOLD PACKAGE ========== -->
+    <div style="background:#fafafa; border-radius:10px; overflow:hidden; margin-bottom:16px; border:2px solid #d4a24c; box-shadow:0 4px 12px rgba(0,0,0,0.12);">
+      <div style="background:linear-gradient(135deg, #d4a24c 0%, #8a6d2b 100%); padding:14px 16px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:18px; color:#1a1a1a;">🥇 GOLD</span>
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:1px; font-size:18px; color:#1a1a1a;">$1,700</span>
       </div>
       <div style="padding:12px 16px;">
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">All Round Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Taper Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">One Level</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Bald Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Mohawk</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Flat Top</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Big Chop</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Buzz Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Low Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Skin Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$3,000</span></div>
-        <div style="margin-top:12px; margin-bottom:4px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">Included — No Extra Cost</div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Eyebrow Shape Up</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">INCLUDED</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Eyebrow Tint</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">INCLUDED</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Warm Towel</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">INCLUDED</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Petty Facial</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">INCLUDED</span></div>
+        <div style="margin-bottom:6px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#8a6d2b;">Package Includes</div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim n Shave</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Beard Oil</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Hair Products</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
       </div>
     </div>
 
-    <!-- ========== REGULAR — TEENS 13–17 ========== -->
-    <div style="background:#fafafa; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(193,39,45,0.35); box-shadow:0 2px 6px rgba(0,0,0,0.06);">
-      <div style="background:var(--accent); padding:10px 16px;">
-        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:15px; color:#f5ead3;">✂ REGULAR — TEENS 13–17</span>
+    <!-- ========== SILVER PACKAGE ========== -->
+    <div style="background:#fafafa; border-radius:10px; overflow:hidden; margin-bottom:20px; border:2px solid #c0c0c0; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+      <div style="background:linear-gradient(135deg, #c0c0c0 0%, #7a7a7a 100%); padding:14px 16px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:18px; color:#1a1a1a;">🥈 SILVER</span>
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:1px; font-size:18px; color:#1a1a1a;">$1,500</span>
       </div>
       <div style="padding:12px 16px;">
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">All Round Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Taper Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">One Level</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Bald Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Mohawk</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Flat Top</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Big Chop</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Buzz Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Low Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Skin Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Eyebrow</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
+        <div style="margin-bottom:6px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#555;">Package Includes</div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim n Shave</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Beard Oil</span><span style="font-size:14px; color:#4caf50; font-weight:700; white-space:nowrap; margin-left:12px;">✓ INCLUDED</span></div>
       </div>
     </div>
 
-    <!-- ========== KIDS 3–12 ========== -->
+    <!-- Separator -->
+    <div style="text-align:center; margin:24px 0 16px; color:#fff; font-family:'Bebas Neue',cursive; letter-spacing:3px; font-size:18px; text-shadow:0 2px 6px rgba(0,0,0,0.8);">— INDIVIDUAL SERVICES —</div>
+
+    <!-- ========== ADULTS ========== -->
     <div style="background:#fafafa; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(193,39,45,0.35); box-shadow:0 2px 6px rgba(0,0,0,0.06);">
       <div style="background:var(--accent); padding:10px 16px;">
-        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:15px; color:#f5ead3;">👦 KIDS 3–12</span>
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:15px; color:#f5ead3;">👨 ADULTS</span>
       </div>
       <div style="padding:12px 16px;">
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">All Round Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500+</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Taper Fade</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500+</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">One Level</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500+</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Bald Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500+</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Mohawk</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500+</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Flat Top</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500+</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Big Chop</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500+</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Buzz Cut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500+</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">School Boy Trim</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500+</span></div>
-        <div style="margin-top:12px; margin-bottom:4px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">Optional Extras</div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Line Up</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500+</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Custom Design</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$200+</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim n Shave</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,200</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Shave Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Line Up Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Line Up and Shave</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,000</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Hot Towel Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim &amp; Shave + Hot Towel &amp; Beard Oil</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim &amp; Shave + Spray Tint Hair Line &amp; Hot Towel</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Eyebrow Tinting</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,200</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Eyebrow</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Kut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,200+</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Scissors Kut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000+</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Designs</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800+</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Spray Tint Hair Line</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Color Hair Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Color Hair and Beard</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500</span></div>
       </div>
+    </div>
+
+    <!-- ========== TEENS ========== -->
+    <div style="background:#fafafa; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(193,39,45,0.35); box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+      <div style="background:var(--accent); padding:10px 16px;">
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:15px; color:#f5ead3;">🧑 TEENS</span>
+      </div>
+      <div style="padding:12px 16px;">
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim n Shave</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,200</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,000</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Shave Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$700</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Line Up Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$700</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Line Up and Shave</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,000</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Hot Towel Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Eyebrow</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Eyebrow Tinting</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,200</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Designs</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800+</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Spray Tint Hair Line</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Kut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,200+</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Scissors Kut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000+</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Color Hair Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Color Hair and Beard</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500</span></div>
+      </div>
+    </div>
+
+    <!-- ========== KIDS ========== -->
+    <div style="background:#fafafa; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid rgba(193,39,45,0.35); box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+      <div style="background:var(--accent); padding:10px 16px;">
+        <span style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:15px; color:#f5ead3;">🧒 KIDS</span>
+      </div>
+      <div style="padding:12px 16px;">
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Boyz Kut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,000</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Designs</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800+</span></div>
+      </div>
+    </div>
+
+    <!-- BOOK NOW button -->
+    <div style="text-align:center; margin:20px 0 40px;">
+      <button onclick="showSection('bookingSection')" class="book-now-btn" style="font-size:18px; padding:13px 32px;">BOOK A CUT NOW</button>
     </div>
 
   </div>
@@ -1048,6 +1115,13 @@ const firebaseConfig = {
     else if (sectionId === 'reviewsSection') loadReviews(currentUser);
     else if (sectionId === 'walkInPriceSection') renderWalkInSlots();
 
+    // Swap background image on the Price List page
+    if (sectionId === 'walkInPriceSection') {
+      document.body.classList.add('price-list-bg');
+    } else {
+      document.body.classList.remove('price-list-bg');
+    }
+
     // Home action buttons only appear on the home page
     const btns = document.getElementById('homeActionButtons');
     if (btns) btns.style.display = (sectionId === 'homeSection') ? 'flex' : 'none';
@@ -1115,26 +1189,61 @@ const firebaseConfig = {
     showSection('homeSection');
   });
 
-  // Appointment days: Tue–Sun | Closed: Monday
+  // Appointment days: Every day (Sunday–Saturday) | 8:00 AM – 9:00 PM
   const businessHours = {
-    'Monday':    null,   // Closed
-    'Tuesday':   { open: '6:30 AM', close: '7:00 PM' },
-    'Wednesday': { open: '6:30 AM', close: '7:00 PM' },
-    'Thursday':  { open: '6:30 AM', close: '7:00 PM' },
-    'Friday':    { open: '6:30 AM', close: '7:00 PM' },
-    'Saturday':  { open: '6:30 AM', close: '7:00 PM' },
-    'Sunday':    { open: '6:30 AM', close: '7:00 PM' }
+    'Monday':    { open: '8:00 AM', close: '9:00 PM' },
+    'Tuesday':   { open: '8:00 AM', close: '9:00 PM' },
+    'Wednesday': { open: '8:00 AM', close: '9:00 PM' },
+    'Thursday':  { open: '8:00 AM', close: '9:00 PM' },
+    'Friday':    { open: '8:00 AM', close: '9:00 PM' },
+    'Saturday':  { open: '8:00 AM', close: '9:00 PM' },
+    'Sunday':    { open: '8:00 AM', close: '9:00 PM' }
   };
 
   // Walk-in-only days (no online booking). Empty = online booking available every open day.
   const walkInDays = [];
 
-  // ========== SERVICE DURATIONS ==========
+  // ========== SERVICE DURATIONS (all 30 mins) ==========
   const serviceDurations = {
-    "Adult Premium Cut": 30,
-    "Adult Regular Cut": 30,
-    "Teen Regular Cut": 30,
-    "Kids Cut": 30
+    // Packages
+    "Platinum Package": 30,
+    "Gold Package": 30,
+    "Silver Package": 30,
+    // Adults
+    "Adult Trim n Shave": 30,
+    "Adult Trim": 30,
+    "Adult Shave Only": 30,
+    "Adult Line Up Only": 30,
+    "Adult Line Up and Shave": 30,
+    "Adult Hot Towel Only": 30,
+    "Adult Trim Shave Hot Towel Beard Oil": 30,
+    "Adult Trim Shave Spray Tint Hot Towel": 30,
+    "Adult Eyebrow Tinting": 30,
+    "Adult Eyebrow": 30,
+    "Adult Ladies Kut": 30,
+    "Adult Ladies Scissors Kut": 30,
+    "Adult Designs": 30,
+    "Adult Spray Tint Hair Line": 30,
+    "Adult Color Hair Only": 30,
+    "Adult Color Hair and Beard": 30,
+    // Teens
+    "Teen Trim n Shave": 30,
+    "Teen Trim": 30,
+    "Teen Shave Only": 30,
+    "Teen Line Up Only": 30,
+    "Teen Line Up and Shave": 30,
+    "Teen Hot Towel Only": 30,
+    "Teen Eyebrow": 30,
+    "Teen Eyebrow Tinting": 30,
+    "Teen Designs": 30,
+    "Teen Spray Tint Hair Line": 30,
+    "Teen Ladies Kut": 30,
+    "Teen Ladies Scissors Kut": 30,
+    "Teen Color Hair Only": 30,
+    "Teen Color Hair and Beard": 30,
+    // Kids
+    "Kids Boyz Kut": 30,
+    "Kids Designs": 30
   };
 
   function getSelectedServices() {
@@ -1163,18 +1272,20 @@ const firebaseConfig = {
     'Eyebrow': 500,
     'Custom Design': 200,
     'Line Up': 500,
+    'Colour Beard Only': 800,
+    'Colour Hair Only': 800,
   };
 
-  // Premium services include these add-ons at NO EXTRA COST.
-  // When any of these services is selected, the listed add-ons don't add to the total.
+  // Package add-ons that are INCLUDED at no extra cost.
+  // When any of these packages is selected, these items don't add to the total.
   const premiumFreeAddons = {
-    'Adult Premium Cut': ['Eyebrow Shape Up', 'Eyebrow Tint', 'Warm Towel', 'Petty Facial'],
+    'Platinum Package': ['Trim n Shave', 'Hot Towel', 'Beard Oil', 'Eyebrow', 'Hair Products'],
+    'Gold Package': ['Trim n Shave', 'Beard Oil', 'Hair Products'],
+    'Silver Package': ['Trim n Shave', 'Beard Oil'],
   };
 
-  // Per-cut price overrides: used when a specific cut changes the base price
-  const cutPriceOverrides = {
-    'Adult Regular Cut': { 'Ladies Cut': 3500, 'Trim & Shave': 3000 }
-  };
+  // Per-cut price overrides (not used for packages — removed old adult regular override)
+  const cutPriceOverrides = {};
 
   let selectedCutPrice = null; // price of the currently selected cut (if override exists)
 
@@ -1230,10 +1341,16 @@ const firebaseConfig = {
     const summaryBox = document.getElementById('selectionSummary');
     const summaryText = document.getElementById('selectionSummaryText');
     if (!summaryBox || !summaryText) return;
+
+    const haircut = document.getElementById('haircutType')?.value || 'NONE';
+    const def = pricingCardDefs[haircut];
+
     const parts = [];
+    if (def) parts.push('💈 ' + def.label);
     if (selectedCutItem) parts.push('✂ ' + selectedCutItem);
     selectedAddons.forEach(a => parts.push('+ ' + a));
-    if (parts.length === 0) {
+
+    if (!def) {
       summaryBox.style.display = 'none';
       summaryText.innerHTML = '';
     } else {
@@ -1331,110 +1448,140 @@ const firebaseConfig = {
 
   const pricingCardDefs = {
 
-    "Adult Premium Cut": {
-      label: "Adult 18+ — Premium Cut ($3,000)",
-      basePrice: 3000,
-      html: () => buildPricingCard('⭐ ADULT 18+ — PREMIUM CUT &nbsp;|&nbsp; $3,000 &nbsp;|&nbsp; 30 mins', [
-        { title: 'Cut of Choice (pick one):', items: [
-          {name:'All Round Fade',price:''},
-          {name:'Taper Fade',price:''},
-          {name:'One Level',price:''},
-          {name:'Bald Cut',price:''},
-          {name:'Mohawk',price:''},
-          {name:'Flat Top',price:''},
-          {name:'Big Chop',price:''},
-          {name:'Buzz Cut',price:''},
-          {name:'Low Fade',price:''},
-          {name:'Skin Fade',price:''},
-          {name:'Ladies Cut',price:''},
-        ]},
-        { title: 'PLUS+ Included — No Extra Cost:', items: [
-          {name:'Eyebrow Shape Up',price:'INCLUDED',isAddon:true},
-          {name:'Eyebrow Tint',price:'INCLUDED',isAddon:true},
-          {name:'Warm Towel',price:'INCLUDED',isAddon:true},
-          {name:'Petty Facial',price:'INCLUDED',isAddon:true},
-        ]}
-      ])
-    },
-
-    "Adult Regular Cut": {
-      label: "Adult 18+ — Regular Cut ($2,500)",
-      basePrice: 2500,
-      html: () => buildPricingCard('✂ ADULT 18+ — REGULAR CUT &nbsp;|&nbsp; $2,500 &nbsp;|&nbsp; 30 mins', [
-        { title: 'Cut of Choice (pick one):', items: [
-          {name:'All Round Fade',price:''},
-          {name:'Taper Fade',price:''},
-          {name:'One Level',price:''},
-          {name:'Bald Cut',price:''},
-          {name:'Mohawk',price:''},
-          {name:'Flat Top',price:''},
-          {name:'Big Chop',price:''},
-          {name:'Buzz Cut',price:''},
-          {name:'Low Fade',price:''},
-          {name:'Skin Fade',price:''},
-          {name:'Ladies Cut',price:'$3,500'},
-          {name:'Trim & Shave',price:'$3,000'},
-        ]},
-        { title: 'Optional Add-On:', items: [
-          {name:'Eyebrow',price:'$500',isAddon:true},
-        ]}
-      ])
-    },
-
-    "Teen Regular Cut": {
-      label: "Teen 13–17 — Regular Cut ($2,000)",
+    // ========== PACKAGES ==========
+    "Platinum Package": {
+      label: "💎 Platinum Package ($2,000)",
       basePrice: 2000,
-      html: () => buildPricingCard('✂ TEEN 13–17 — REGULAR CUT &nbsp;|&nbsp; $2,000 &nbsp;|&nbsp; 30 mins', [
-        { title: 'Cut of Choice (pick one):', items: [
-          {name:'All Round Fade',price:''},
-          {name:'Taper Fade',price:''},
-          {name:'One Level',price:''},
-          {name:'Bald Cut',price:''},
-          {name:'Mohawk',price:''},
-          {name:'Flat Top',price:''},
-          {name:'Big Chop',price:''},
-          {name:'Buzz Cut',price:''},
-          {name:'Low Fade',price:''},
-          {name:'Skin Fade',price:''},
-          {name:'Ladies Cut',price:''},
+      html: () => buildPricingCard('💎 PLATINUM PACKAGE &nbsp;|&nbsp; $2,000 &nbsp;|&nbsp; 30 mins', [
+        { title: 'Included — No Extra Cost:', items: [
+          {name:'Trim n Shave',price:'INCLUDED',isAddon:true},
+          {name:'Hot Towel',price:'INCLUDED',isAddon:true},
+          {name:'Beard Oil',price:'INCLUDED',isAddon:true},
+          {name:'Eyebrow',price:'INCLUDED',isAddon:true},
+          {name:'Hair Products',price:'INCLUDED',isAddon:true},
         ]},
-        { title: 'Optional Add-On:', items: [
-          {name:'Eyebrow',price:'$500',isAddon:true},
+        { title: 'Optional Extras:', items: [
+          {name:'Colour Beard Only',price:'$800',isAddon:true},
+          {name:'Colour Hair Only',price:'$800',isAddon:true},
         ]}
       ])
     },
 
-    "Kids Cut": {
-      label: "Kids 3–12 — Cut ($1,500+)",
-      basePrice: 1500,
-      html: () => buildPricingCard('✂ KIDS 3–12 — CUT &nbsp;|&nbsp; $1,500+ &nbsp;|&nbsp; 30 mins', [
-        { title: 'Cut of Choice (pick one):', items: [
-          {name:'All Round Fade',price:'$1,500+'},
-          {name:'Taper Fade',price:'$1,500+'},
-          {name:'One Level',price:'$1,500+'},
-          {name:'Bald Cut',price:'$1,500+'},
-          {name:'Mohawk',price:'$1,500+'},
-          {name:'Flat Top',price:'$1,500+'},
-          {name:'Big Chop',price:'$1,500+'},
-          {name:'Buzz Cut',price:'$1,500+'},
-          {name:'School Boy Trim',price:'$1,500+'},
-        ]},
-        { title: 'Optional Add-Ons:', items: [
-          {name:'Line Up',price:'$500+',isAddon:true},
-          {name:'Custom Design',price:'$200+',isAddon:true},
+    "Gold Package": {
+      label: "🥇 Gold Package ($1,700)",
+      basePrice: 1700,
+      html: () => buildPricingCard('🥇 GOLD PACKAGE &nbsp;|&nbsp; $1,700 &nbsp;|&nbsp; 30 mins', [
+        { title: 'Included — No Extra Cost:', items: [
+          {name:'Trim n Shave',price:'INCLUDED',isAddon:true},
+          {name:'Beard Oil',price:'INCLUDED',isAddon:true},
+          {name:'Hair Products',price:'INCLUDED',isAddon:true},
         ]}
       ])
-    }
+    },
+
+    "Silver Package": {
+      label: "🥈 Silver Package ($1,500)",
+      basePrice: 1500,
+      html: () => buildPricingCard('🥈 SILVER PACKAGE &nbsp;|&nbsp; $1,500 &nbsp;|&nbsp; 30 mins', [
+        { title: 'Included — No Extra Cost:', items: [
+          {name:'Trim n Shave',price:'INCLUDED',isAddon:true},
+          {name:'Beard Oil',price:'INCLUDED',isAddon:true},
+        ]}
+      ])
+    },
+
+    // ========== ADULTS ==========
+    "Adult Trim n Shave": { label: "Adult — Trim n Shave ($1,500)", basePrice: 1500,
+      html: () => buildServiceConfirmCard('👨 ADULT — TRIM N SHAVE', '$1,500') },
+    "Adult Trim": { label: "Adult — Trim ($1,200)", basePrice: 1200,
+      html: () => buildServiceConfirmCard('👨 ADULT — TRIM', '$1,200') },
+    "Adult Shave Only": { label: "Adult — Shave Only ($800)", basePrice: 800,
+      html: () => buildServiceConfirmCard('👨 ADULT — SHAVE ONLY', '$800') },
+    "Adult Line Up Only": { label: "Adult — Line Up Only ($800)", basePrice: 800,
+      html: () => buildServiceConfirmCard('👨 ADULT — LINE UP ONLY', '$800') },
+    "Adult Line Up and Shave": { label: "Adult — Line Up and Shave ($1,000)", basePrice: 1000,
+      html: () => buildServiceConfirmCard('👨 ADULT — LINE UP & SHAVE', '$1,000') },
+    "Adult Hot Towel Only": { label: "Adult — Hot Towel Only ($500)", basePrice: 500,
+      html: () => buildServiceConfirmCard('👨 ADULT — HOT TOWEL ONLY', '$500') },
+    "Adult Trim Shave Hot Towel Beard Oil": { label: "Adult — Trim & Shave + Hot Towel & Beard Oil ($2,000)", basePrice: 2000,
+      html: () => buildServiceConfirmCard('👨 ADULT — TRIM &amp; SHAVE + HOT TOWEL &amp; BEARD OIL', '$2,000') },
+    "Adult Trim Shave Spray Tint Hot Towel": { label: "Adult — Trim & Shave + Spray Tint & Hot Towel ($2,000)", basePrice: 2000,
+      html: () => buildServiceConfirmCard('👨 ADULT — TRIM &amp; SHAVE + SPRAY TINT &amp; HOT TOWEL', '$2,000') },
+    "Adult Eyebrow Tinting": { label: "Adult — Eyebrow Tinting ($1,200)", basePrice: 1200,
+      html: () => buildServiceConfirmCard('👨 ADULT — EYEBROW TINTING', '$1,200') },
+    "Adult Eyebrow": { label: "Adult — Eyebrow ($500)", basePrice: 500,
+      html: () => buildServiceConfirmCard('👨 ADULT — EYEBROW', '$500') },
+    "Adult Ladies Kut": { label: "Adult — Ladies Kut ($1,200+)", basePrice: 1200,
+      html: () => buildServiceConfirmCard('👨 ADULT — LADIES KUT', '$1,200+') },
+    "Adult Ladies Scissors Kut": { label: "Adult — Ladies Scissors Kut ($2,000+)", basePrice: 2000,
+      html: () => buildServiceConfirmCard('👨 ADULT — LADIES SCISSORS KUT', '$2,000+') },
+    "Adult Designs": { label: "Adult — Designs ($800+)", basePrice: 800,
+      html: () => buildServiceConfirmCard('👨 ADULT — DESIGNS', '$800+') },
+    "Adult Spray Tint Hair Line": { label: "Adult — Spray Tint Hair Line ($500)", basePrice: 500,
+      html: () => buildServiceConfirmCard('👨 ADULT — SPRAY TINT HAIR LINE', '$500') },
+    "Adult Color Hair Only": { label: "Adult — Color Hair Only ($800)", basePrice: 800,
+      html: () => buildServiceConfirmCard('👨 ADULT — COLOR HAIR ONLY', '$800') },
+    "Adult Color Hair and Beard": { label: "Adult — Color Hair and Beard ($1,500)", basePrice: 1500,
+      html: () => buildServiceConfirmCard('👨 ADULT — COLOR HAIR &amp; BEARD', '$1,500') },
+
+    // ========== TEENS ==========
+    "Teen Trim n Shave": { label: "Teen — Trim n Shave ($1,200)", basePrice: 1200,
+      html: () => buildServiceConfirmCard('🧑 TEEN — TRIM N SHAVE', '$1,200') },
+    "Teen Trim": { label: "Teen — Trim ($1,000)", basePrice: 1000,
+      html: () => buildServiceConfirmCard('🧑 TEEN — TRIM', '$1,000') },
+    "Teen Shave Only": { label: "Teen — Shave Only ($700)", basePrice: 700,
+      html: () => buildServiceConfirmCard('🧑 TEEN — SHAVE ONLY', '$700') },
+    "Teen Line Up Only": { label: "Teen — Line Up Only ($700)", basePrice: 700,
+      html: () => buildServiceConfirmCard('🧑 TEEN — LINE UP ONLY', '$700') },
+    "Teen Line Up and Shave": { label: "Teen — Line Up and Shave ($1,000)", basePrice: 1000,
+      html: () => buildServiceConfirmCard('🧑 TEEN — LINE UP & SHAVE', '$1,000') },
+    "Teen Hot Towel Only": { label: "Teen — Hot Towel Only ($500)", basePrice: 500,
+      html: () => buildServiceConfirmCard('🧑 TEEN — HOT TOWEL ONLY', '$500') },
+    "Teen Eyebrow": { label: "Teen — Eyebrow ($500)", basePrice: 500,
+      html: () => buildServiceConfirmCard('🧑 TEEN — EYEBROW', '$500') },
+    "Teen Eyebrow Tinting": { label: "Teen — Eyebrow Tinting ($1,200)", basePrice: 1200,
+      html: () => buildServiceConfirmCard('🧑 TEEN — EYEBROW TINTING', '$1,200') },
+    "Teen Designs": { label: "Teen — Designs ($800+)", basePrice: 800,
+      html: () => buildServiceConfirmCard('🧑 TEEN — DESIGNS', '$800+') },
+    "Teen Spray Tint Hair Line": { label: "Teen — Spray Tint Hair Line ($500)", basePrice: 500,
+      html: () => buildServiceConfirmCard('🧑 TEEN — SPRAY TINT HAIR LINE', '$500') },
+    "Teen Ladies Kut": { label: "Teen — Ladies Kut ($1,200+)", basePrice: 1200,
+      html: () => buildServiceConfirmCard('🧑 TEEN — LADIES KUT', '$1,200+') },
+    "Teen Ladies Scissors Kut": { label: "Teen — Ladies Scissors Kut ($2,000+)", basePrice: 2000,
+      html: () => buildServiceConfirmCard('🧑 TEEN — LADIES SCISSORS KUT', '$2,000+') },
+    "Teen Color Hair Only": { label: "Teen — Color Hair Only ($800)", basePrice: 800,
+      html: () => buildServiceConfirmCard('🧑 TEEN — COLOR HAIR ONLY', '$800') },
+    "Teen Color Hair and Beard": { label: "Teen — Color Hair and Beard ($1,500)", basePrice: 1500,
+      html: () => buildServiceConfirmCard('🧑 TEEN — COLOR HAIR &amp; BEARD', '$1,500') },
+
+    // ========== KIDS ==========
+    "Kids Boyz Kut": { label: "Kids — Boyz Kut ($1,000)", basePrice: 1000,
+      html: () => buildServiceConfirmCard('🧒 KIDS — BOYZ KUT', '$1,000') },
+    "Kids Designs": { label: "Kids — Designs ($800+)", basePrice: 800,
+      html: () => buildServiceConfirmCard('🧒 KIDS — DESIGNS', '$800+') }
   };
+
+  // Simple confirmation card for services that have a fixed price (no cut-of-choice picker needed)
+  function buildServiceConfirmCard(headerHTML, priceLabel) {
+    return `<div style="background:var(--accent);padding:10px 14px;">
+      <span style="font-family:'Bebas Neue',cursive;letter-spacing:2px;font-size:14px;color:#1a1a1a;">${headerHTML}</span>
+    </div>
+    <div style="padding:12px 14px; text-align:center;">
+      <div style="font-family:'Bebas Neue',cursive; letter-spacing:2px; font-size:22px; color:var(--accent); margin-bottom:4px;">💰 ${priceLabel}</div>
+      <div style="font-size:12px; color:#aaa; font-style:italic;">This service is ready to book. Pick your time above.</div>
+    </div>`;
+  }
 
   // Compatibility shim — old code referenced pricingCards
   const pricingCards = {};
 
   function onAgeGroupChange() {
     const group = document.getElementById('ageGroup').value;
+    document.getElementById('packageServiceWrap').style.display = 'none';
     document.getElementById('adultServiceWrap').style.display = 'none';
     document.getElementById('teenServiceWrap').style.display = 'none';
     document.getElementById('kidsServiceWrap').style.display = 'none';
+    document.getElementById('packageService').value = 'NONE';
     document.getElementById('adultService').value = 'NONE';
     document.getElementById('teenService').value = 'NONE';
     document.getElementById('kidsService').value = 'NONE';
@@ -1443,26 +1590,18 @@ const firebaseConfig = {
     const hidden = document.getElementById('haircutType');
     clearSelections();
 
-    if (group === 'adult') {
+    if (group === 'package') {
+      document.getElementById('packageServiceWrap').style.display = 'block';
+    } else if (group === 'adult') {
       document.getElementById('adultServiceWrap').style.display = 'block';
-      hidden.value = 'NONE';
-      card.style.display = 'none';
-      card.innerHTML = '';
     } else if (group === 'teen') {
       document.getElementById('teenServiceWrap').style.display = 'block';
-      hidden.value = 'NONE';
-      card.style.display = 'none';
-      card.innerHTML = '';
     } else if (group === 'kids') {
       document.getElementById('kidsServiceWrap').style.display = 'block';
-      hidden.value = 'NONE';
-      card.style.display = 'none';
-      card.innerHTML = '';
-    } else {
-      hidden.value = 'NONE';
-      card.style.display = 'none';
-      card.innerHTML = '';
     }
+    hidden.value = 'NONE';
+    card.style.display = 'none';
+    card.innerHTML = '';
     showEstimateTime();
     loadAvailableSlots();
   }
@@ -1470,7 +1609,8 @@ const firebaseConfig = {
   function onServiceChange() {
     const group = document.getElementById('ageGroup').value;
     let svc = 'NONE';
-    if (group === 'adult') svc = document.getElementById('adultService').value;
+    if (group === 'package') svc = document.getElementById('packageService').value;
+    else if (group === 'adult') svc = document.getElementById('adultService').value;
     else if (group === 'teen') svc = document.getElementById('teenService').value;
     else if (group === 'kids') svc = document.getElementById('kidsService').value;
 
@@ -1487,6 +1627,7 @@ const firebaseConfig = {
       card.style.display = 'none';
       card.innerHTML = '';
     }
+    updateSelectionSummary();
     showEstimateTime();
     loadAvailableSlots();
   }
@@ -1707,7 +1848,10 @@ const firebaseConfig = {
       return;
     }
 
-    if (!selectedCutItem) {
+    // Only require a "Cut of Choice" if the current service card actually has cut-item rows
+    const card = document.getElementById('serviceIncludesCard');
+    const hasCutPicker = card && card.querySelector('.cut-item');
+    if (hasCutPicker && !selectedCutItem) {
       alert('Please select your Cut of Choice before booking.');
       return;
     }
@@ -1759,8 +1903,11 @@ const firebaseConfig = {
 
         document.querySelector("#bookingSection form").reset();
         clearSelections();
+        document.getElementById('packageServiceWrap').style.display = 'none';
         document.getElementById('adultServiceWrap').style.display = 'none';
         document.getElementById('teenServiceWrap').style.display = 'none';
+        document.getElementById('kidsServiceWrap').style.display = 'none';
+        document.getElementById('haircutType').value = 'NONE';
         document.getElementById('serviceIncludesCard').style.display = 'none';
         document.getElementById('serviceIncludesCard').innerHTML = '';
         document.getElementById("estimateTimeMessage").innerHTML = "";
@@ -1796,28 +1943,6 @@ const firebaseConfig = {
 
   function closeBookingModal() {
     document.getElementById('bookingModal').style.display = 'none';
-  }
-
-  // ========== PAYMENT INFO ==========    
-   function showPaymentInfo() {
-    Swal.fire({
-      title: "<div style='font-family:Bebas Neue,cursive;letter-spacing:2px;font-size:22px;'>BANK TRANSFER INFO</div>",
-      html: `
-        <div style="text-align:left; font-size:16px; line-height:1.8; color:white; font-family:Barlow,sans-serif;">
-          <p><b>Bank Name:</b> Sajicor</p>
-          <p><b>Account Name:</b> Donovan McLeggon</p>
-          <p><b>Account Number:</b> 5503142521</p>
-          <p><b>Branch:</b> Ligonny Saverin, Jamaica</p>
-          <p><b>Note:</b> Use your Booking # as the payment reference.</p>
-        </div>
-      `,
-      width: 500,
-      confirmButtonText: "CLOSE",
-      background: "#1a1a1a",
-      color: "white",
-      confirmButtonColor: "#c1272d",
-      customClass: { popup: "swal2-rounded" }
-    });
   }
 
   // ========== REVIEWS ==========
@@ -2077,9 +2202,9 @@ const firebaseConfig = {
   function renderWalkInSlots() {
     const container = document.getElementById('walkInSlotsDisplay');
     if (!container) return;
-    const OPEN = 10 * 60;      // 10:00 AM in minutes
-    const CLOSE = 18 * 60;     // 6:00 PM in minutes
-    const INTERVAL = 35;
+    const OPEN = 8 * 60;       // 8:00 AM in minutes
+    const CLOSE = 21 * 60;     // 9:00 PM in minutes
+    const INTERVAL = 30;
     function fmt(m) {
       const h = Math.floor(m / 60);
       const min = m % 60;
