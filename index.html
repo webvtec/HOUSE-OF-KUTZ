@@ -732,6 +732,7 @@
         <option value="Adult Trim Shave Spray Tint Hot Towel">Trim &amp; Shave + Spray Tint Hair Line &amp; Hot Towel — $2,500</option>
         <option value="Adult Ladies Kut">Ladies Kut — $1,200+</option>
         <option value="Adult Ladies Scissors Kut">Ladies Scissors Kut — $2,000+</option>
+        <option value="Adult Color Beard Only">Color Beard Only — $800</option>
       </select>
     </div>
 
@@ -747,6 +748,7 @@
         <option value="Teen Line Up and Shave">Line Up and Shave — $1,000</option>
         <option value="Teen Ladies Kut">Ladies Kut — $1,200+</option>
         <option value="Teen Ladies Scissors Kut">Ladies Scissors Kut — $2,000+</option>
+        <option value="Teen Color Beard Only">Color Beard Only — $800</option>
       </select>
     </div>
 
@@ -881,6 +883,7 @@
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Designs</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800+</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Spray Tint Hair Line</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Color Hair Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Color Beard Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Color Hair and Beard</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500</span></div>
       </div>
     </div>
@@ -904,6 +907,7 @@
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Kut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,200+</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Scissors Kut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000+</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Color Hair Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Color Beard Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$800</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0;"><span style="font-size:14px; color:#1a1a1a;">Color Hair and Beard</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,500</span></div>
       </div>
     </div>
@@ -1204,6 +1208,7 @@ const firebaseConfig = {
     "Adult Trim Shave Spray Tint Hot Towel": 30,
     "Adult Ladies Kut": 30,
     "Adult Ladies Scissors Kut": 30,
+    "Adult Color Beard Only": 30,
     // Teens
     "Teen Trim n Shave": 30,
     "Teen Trim": 30,
@@ -1212,6 +1217,7 @@ const firebaseConfig = {
     "Teen Line Up and Shave": 30,
     "Teen Ladies Kut": 30,
     "Teen Ladies Scissors Kut": 30,
+    "Teen Color Beard Only": 30,
     // Kids
     "Kids Boyz Kut": 30
   };
@@ -1622,6 +1628,22 @@ const firebaseConfig = {
         ]}
       ])
     },
+    "Adult Color Beard Only": {
+      label: "Adult — Color Beard Only ($800)",
+      basePrice: 800,
+      html: () => buildPricingCard('👨 ADULT — COLOR BEARD ONLY &nbsp;|&nbsp; $800 &nbsp;|&nbsp; 30 mins', [
+        { title: 'Optional Add-Ons (tick what you want):', items: [
+          {name:'Hot Towel',price:'$500',isAddon:true},
+          {name:'Beard Oil',price:'$500',isAddon:true},
+          {name:'Eyebrow',price:'$500',isAddon:true},
+          {name:'Eyebrow Tinting',price:'$1,200',isAddon:true},
+          {name:'Spray Tint Hair Line',price:'$500',isAddon:true},
+          {name:'Designs',price:'$800',isAddon:true},
+          {name:'Color Hair Only',price:'$800',isAddon:true},
+          {name:'Color Hair and Beard',price:'$1,500',isAddon:true},
+        ]}
+      ])
+    },
 
     // ========== TEENS ==========
     "Teen Trim n Shave": {
@@ -1724,6 +1746,22 @@ const firebaseConfig = {
       label: "Teen — Ladies Scissors Kut ($2,000+)",
       basePrice: 2000,
       html: () => buildPricingCard('🧑 TEEN — LADIES SCISSORS KUT &nbsp;|&nbsp; $2,000+ &nbsp;|&nbsp; 30 mins', [
+        { title: 'Optional Add-Ons (tick what you want):', items: [
+          {name:'Hot Towel',price:'$500',isAddon:true},
+          {name:'Beard Oil',price:'$500',isAddon:true},
+          {name:'Eyebrow',price:'$500',isAddon:true},
+          {name:'Eyebrow Tinting',price:'$1,200',isAddon:true},
+          {name:'Spray Tint Hair Line',price:'$500',isAddon:true},
+          {name:'Designs',price:'$800',isAddon:true},
+          {name:'Color Hair Only',price:'$800',isAddon:true},
+          {name:'Color Hair and Beard',price:'$1,500',isAddon:true},
+        ]}
+      ])
+    },
+    "Teen Color Beard Only": {
+      label: "Teen — Color Beard Only ($800)",
+      basePrice: 800,
+      html: () => buildPricingCard('🧑 TEEN — COLOR BEARD ONLY &nbsp;|&nbsp; $800 &nbsp;|&nbsp; 30 mins', [
         { title: 'Optional Add-Ons (tick what you want):', items: [
           {name:'Hot Towel',price:'$500',isAddon:true},
           {name:'Beard Oil',price:'$500',isAddon:true},
