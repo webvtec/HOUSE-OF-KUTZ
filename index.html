@@ -729,7 +729,7 @@
         <option value="Adult Line Up Only">Line Up Only — $800</option>
         <option value="Adult Line Up and Shave">Line Up and Shave — $1,000</option>
         <option value="Adult Trim Shave Hot Towel Beard Oil">Trim &amp; Shave + Hot Towel &amp; Beard Oil — $2,000</option>
-        <option value="Adult Trim Shave Spray Tint Hot Towel">Trim &amp; Shave + Spray Tint &amp; Hot Towel — $2,000</option>
+        <option value="Adult Trim Shave Spray Tint Hot Towel">Trim &amp; Shave + Spray Tint Hair Line &amp; Hot Towel — $2,500</option>
         <option value="Adult Ladies Kut">Ladies Kut — $1,200+</option>
         <option value="Adult Ladies Scissors Kut">Ladies Scissors Kut — $2,000+</option>
       </select>
@@ -873,7 +873,7 @@
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Line Up and Shave</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,000</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Hot Towel Only</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim &amp; Shave + Hot Towel &amp; Beard Oil</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim &amp; Shave + Spray Tint Hair Line &amp; Hot Towel</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,000</span></div>
+        <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Trim &amp; Shave + Spray Tint Hair Line &amp; Hot Towel</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$2,500</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Eyebrow Tinting</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,200</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Eyebrow</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$500</span></div>
         <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.07);"><span style="font-size:14px; color:#1a1a1a;">Ladies Kut</span><span style="font-size:14px; color:var(--accent); font-weight:700; white-space:nowrap; margin-left:12px;">$1,200+</span></div>
@@ -1557,7 +1557,7 @@ const firebaseConfig = {
     "Adult Trim Shave Hot Towel Beard Oil": {
       label: "Adult — Trim &amp; Shave + Hot Towel &amp; Beard Oil ($2,000)",
       basePrice: 2000,
-      html: () => buildPricingCard('👨 ADULT — TRIM &AMP; SHAVE + HOT TOWEL &AMP; BEARD OIL &nbsp;|&nbsp; $2,000 &nbsp;|&nbsp; 30 mins', [
+      html: () => buildPricingCard('👨 ADULT — TRIM &amp; SHAVE + HOT TOWEL &amp; BEARD OIL &nbsp;|&nbsp; $2,000 &nbsp;|&nbsp; 30 mins', [
         { title: 'Optional Add-Ons (tick what you want):', items: [
           {name:'Hot Towel',price:'$500',isAddon:true},
           {name:'Beard Oil',price:'$500',isAddon:true},
@@ -1572,9 +1572,9 @@ const firebaseConfig = {
       ])
     },
     "Adult Trim Shave Spray Tint Hot Towel": {
-      label: "Adult — Trim &amp; Shave + Spray Tint &amp; Hot Towel ($2,000)",
-      basePrice: 2000,
-      html: () => buildPricingCard('👨 ADULT — TRIM &AMP; SHAVE + SPRAY TINT &AMP; HOT TOWEL &nbsp;|&nbsp; $2,000 &nbsp;|&nbsp; 30 mins', [
+      label: "Adult — Trim &amp; Shave + Spray Tint Hair Line &amp; Hot Towel ($2,500)",
+      basePrice: 2500,
+      html: () => buildPricingCard('👨 ADULT — TRIM &amp; SHAVE + SPRAY TINT HAIR LINE &amp; HOT TOWEL &nbsp;|&nbsp; $2,500 &nbsp;|&nbsp; 30 mins', [
         { title: 'Optional Add-Ons (tick what you want):', items: [
           {name:'Hot Towel',price:'$500',isAddon:true},
           {name:'Beard Oil',price:'$500',isAddon:true},
@@ -2069,8 +2069,8 @@ const firebaseConfig = {
         const totalStr = total > 0 ? `\n💰 Total: $${total.toLocaleString()}` : '';
         const message = `✂️ NEW BOOKING\n\n🔢 Booking #: ${bookingNumber}\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Date: ${formattedDate}\n⏰ Time: ${time}\n💈 Service: ${services}${totalStr}`;
 
-        const telegramBotToken = "8693721031:AAHMRcrqCQ05jWoqY70hcZD_WhiHFpg-oIc";
-        const telegramChatId = "-1003708066968";
+        const telegramBotToken = "8371174:AAH0S_dbWCylhZnCq99HF_r5lwCg-GBJrgQ";
+        const telegramChatId = "-10039585504";
 
         fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
           method: "POST",
