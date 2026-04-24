@@ -208,6 +208,49 @@
       accent-color: var(--accent);
     }
 
+    /* ---- Multi-preview grid ---- */
+    #imagePreviewGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 12px 0;
+    }
+    #imagePreviewGrid .preview-thumb {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: #eee;
+    }
+    #imagePreviewGrid .preview-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    #imagePreviewGrid .preview-thumb .thumb-count {
+      position: absolute; bottom: 4px; right: 6px;
+      background: rgba(0,0,0,0.55); color: #fff;
+      font-size: 11px; padding: 2px 5px; border-radius: 4px;
+    }
+    /* ---- Per-file progress ---- */
+    .file-progress-item {
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-family: 'Barlow', sans-serif;
+      color: #444;
+    }
+    .file-progress-item span {
+      display: block;
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .file-progress-item progress {
+      width: 100%; height: 6px; border-radius: 3px; accent-color: var(--accent);
+    }
+    .file-progress-item.done span { color: #4CAF50; }
+    .file-progress-item.error span { color: #e53935; }
+
     /* ---- Gallery ---- */
     .gallery-category { margin-top: 40px; }
 
@@ -422,30 +465,35 @@
 
   <!-- Gallery Management -->
   <div id="gallerySection" class="admin-container content-section">
-    <h2>📸 UPLOAD PHOTO</h2>
+    <h2>📸 UPLOAD PHOTOS</h2>
 
     <!-- Device Upload Area -->
     <div class="upload-area" id="uploadArea">
-      <input type="file" id="photoFileInput" accept="image/*" onchange="previewImage(event)"/>
+      <input type="file" id="photoFileInput" accept="image/*" multiple onchange="previewImages(event)"/>
       <div class="upload-icon">📷</div>
-      <p><strong>Tap to choose a photo</strong><br>or drag and drop here</p>
+      <p><strong>Tap to choose photos</strong><br>or drag and drop here — select as many as you want</p>
     </div>
 
-    <!-- Image Preview -->
-    <img id="imagePreview" alt="Preview"/>
+    <!-- Multi-Image Preview Grid -->
+    <div id="imagePreviewGrid" style="display:none; display:none; grid-template-columns:repeat(3,1fr); gap:10px; margin:12px 0;"></div>
+    <!-- Legacy single preview (hidden, kept for compat) -->
+    <img id="imagePreview" alt="Preview" style="display:none;"/>
 
     <!-- Upload Progress -->
-    <div id="uploadProgress">
-      <p style="font-size:13px; color:#888; margin-bottom:4px;">Uploading...</p>
+    <div id="uploadProgress" style="display:none;">
+      <p id="uploadProgressLabel" style="font-size:13px; color:#888; margin-bottom:4px;">Uploading...</p>
       <progress id="progressBar" value="0" max="100"></progress>
     </div>
+
+    <!-- Per-file progress list -->
+    <div id="fileProgressList" style="margin-bottom:12px;"></div>
 
     <label for="photoCategorySelect">CATEGORY</label>
     <select id="photoCategorySelect">
       <option value="HOUSE OF KUTZ">HOUSE OF KUTZ</option>
     </select>
 
-    <button onclick="uploadPhoto()" id="uploadBtn">ADD PHOTO</button>
+    <button onclick="uploadPhotos()" id="uploadBtn">ADD PHOTOS</button>
 
     <div id="adminGallery"></div>
   </div>
@@ -556,92 +604,147 @@
       document.getElementById('timeInputs').style.display = isAllDay ? 'none' : 'block';
     }
 
-    // ========== DEVICE UPLOAD ==========
-    function previewImage(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+    // ========== DEVICE UPLOAD (MULTI-FILE) ==========
+    function previewImages(event) {
+      const files = Array.from(event.target.files);
+      if (!files.length) return;
 
-      const preview = document.getElementById('imagePreview');
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-      };
-      reader.readAsDataURL(file);
+      const grid = document.getElementById('imagePreviewGrid');
+      grid.innerHTML = '';
+      grid.style.display = 'grid';
 
-      // Update upload area text
+      // Show up to 6 thumbs, then a "+N more" tile
+      const maxShow = 6;
+      files.slice(0, maxShow).forEach((file, i) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'preview-thumb';
+        const img = document.createElement('img');
+        const reader = new FileReader();
+        reader.onload = e => { img.src = e.target.result; };
+        reader.readAsDataURL(file);
+        thumb.appendChild(img);
+        if (i === maxShow - 1 && files.length > maxShow) {
+          const extra = document.createElement('div');
+          extra.className = 'thumb-count';
+          extra.textContent = `+${files.length - maxShow} more`;
+          thumb.appendChild(extra);
+        }
+        grid.appendChild(thumb);
+      });
+
       const uploadArea = document.getElementById('uploadArea');
-      uploadArea.querySelector('p').innerHTML = `<strong>${file.name}</strong><br><span style="color:#888;">Ready to upload</span>`;
+      uploadArea.querySelector('p').innerHTML =
+        `<strong>${files.length} photo${files.length > 1 ? 's' : ''} selected</strong><br><span style="color:#888;">Ready to upload</span>`;
     }
 
-    function uploadPhoto() {
+    async function uploadPhotos() {
       const fileInput = document.getElementById('photoFileInput');
-      const categorySelect = document.getElementById('photoCategorySelect');
-      const category = categorySelect.value.trim();
-      const file = fileInput.files[0];
+      const category = document.getElementById('photoCategorySelect').value.trim();
+      const files = Array.from(fileInput.files);
 
-      if (!file) {
-        alert('Please select a photo from your device first.');
-        return;
-      }
-
-      if (!category) {
-        alert('Please select a category.');
-        return;
-      }
+      if (!files.length) { alert('Please select at least one photo.'); return; }
+      if (!category) { alert('Please select a category.'); return; }
 
       const uploadBtn = document.getElementById('uploadBtn');
       uploadBtn.disabled = true;
-      uploadBtn.textContent = 'UPLOADING...';
+      uploadBtn.textContent = `UPLOADING 0 / ${files.length}...`;
 
+      // Show overall bar
       const progressDiv = document.getElementById('uploadProgress');
       const progressBar = document.getElementById('progressBar');
+      const progressLabel = document.getElementById('uploadProgressLabel');
       progressDiv.style.display = 'block';
+      progressBar.value = 0;
+      progressBar.max = files.length;
 
-      // Create unique filename
-      const timestamp = Date.now();
-      const ext = file.name.split('.').pop();
-      const fileName = `gallery/${timestamp}_${Math.random().toString(36).substring(2)}.${ext}`;
+      // Build per-file progress list
+      const listEl = document.getElementById('fileProgressList');
+      listEl.innerHTML = '';
+      const progressItems = files.map((file, i) => {
+        const item = document.createElement('div');
+        item.className = 'file-progress-item';
+        item.innerHTML = `<span>⏳ ${file.name}</span><progress value="0" max="100"></progress>`;
+        listEl.appendChild(item);
+        return item;
+      });
 
-      const storageRef = storage.ref(fileName);
-      const uploadTask = storageRef.put(file);
+      let completed = 0;
+      let failed = 0;
 
-      uploadTask.on('state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          progressBar.value = progress;
-        },
-        (error) => {
-          console.error("Upload error:", error);
-          alert('Upload failed: ' + error.message);
-          uploadBtn.disabled = false;
-          uploadBtn.textContent = 'ADD PHOTO';
-          progressDiv.style.display = 'none';
-        },
-        () => {
-          // Upload complete — get download URL
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            return db.collection('gallery').add({ url: downloadURL, category: category, sortOrder: Date.now(), uploadedAt: firebase.firestore.FieldValue.serverTimestamp() });
-          }).then(() => {
-            showToast('✅ Photo uploaded successfully!');
-            // Reset form
-            fileInput.value = '';
-            document.getElementById('imagePreview').style.display = 'none';
-            document.getElementById('imagePreview').src = '';
-            progressDiv.style.display = 'none';
-            progressBar.value = 0;
-            uploadBtn.disabled = false;
-            uploadBtn.textContent = 'ADD PHOTO';
-            document.getElementById('uploadArea').querySelector('p').innerHTML = '<strong>Tap to choose a photo</strong><br>or drag and drop here';
-          }).catch((error) => {
-            console.error("Firestore error:", error);
-            alert('Error saving photo reference: ' + error.message);
-            uploadBtn.disabled = false;
-            uploadBtn.textContent = 'ADD PHOTO';
-            progressDiv.style.display = 'none';
-          });
-        }
-      );
+      const uploadOne = (file, index) => {
+        return new Promise((resolve) => {
+          const ext = file.name.split('.').pop();
+          const fileName = `gallery/${Date.now()}_${Math.random().toString(36).substring(2)}.${ext}`;
+          const task = storage.ref(fileName).put(file);
+          const item = progressItems[index];
+          const bar = item.querySelector('progress');
+
+          task.on('state_changed',
+            snap => { bar.value = (snap.bytesTransferred / snap.totalBytes) * 100; },
+            err => {
+              item.classList.add('error');
+              item.querySelector('span').textContent = `❌ ${file.name} — failed`;
+              failed++;
+              completed++;
+              progressBar.value = completed;
+              progressLabel.textContent = `Uploading ${completed} / ${files.length}...`;
+              uploadBtn.textContent = `UPLOADING ${completed} / ${files.length}...`;
+              resolve();
+            },
+            async () => {
+              try {
+                const url = await task.snapshot.ref.getDownloadURL();
+                await db.collection('gallery').add({
+                  url, category,
+                  sortOrder: Date.now() + index,
+                  uploadedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                bar.value = 100;
+                item.classList.add('done');
+                item.querySelector('span').textContent = `✅ ${file.name}`;
+              } catch (e) {
+                item.classList.add('error');
+                item.querySelector('span').textContent = `❌ ${file.name} — save error`;
+                failed++;
+              }
+              completed++;
+              progressBar.value = completed;
+              progressLabel.textContent = `Uploading ${completed} / ${files.length}...`;
+              uploadBtn.textContent = `UPLOADING ${completed} / ${files.length}...`;
+              resolve();
+            }
+          );
+        });
+      };
+
+      // Upload all in parallel (batched to avoid overwhelming Firebase)
+      const batchSize = 3;
+      for (let i = 0; i < files.length; i += batchSize) {
+        const batch = files.slice(i, i + batchSize).map((f, j) => uploadOne(f, i + j));
+        await Promise.all(batch);
+      }
+
+      // Done
+      const successCount = files.length - failed;
+      if (failed === 0) {
+        showToast(`✅ ${successCount} photo${successCount > 1 ? 's' : ''} uploaded!`);
+      } else {
+        showToast(`⚠️ ${successCount} uploaded, ${failed} failed.`, false);
+      }
+
+      // Reset
+      setTimeout(() => {
+        fileInput.value = '';
+        document.getElementById('imagePreviewGrid').style.display = 'none';
+        document.getElementById('imagePreviewGrid').innerHTML = '';
+        progressDiv.style.display = 'none';
+        progressBar.value = 0;
+        listEl.innerHTML = '';
+        uploadBtn.disabled = false;
+        uploadBtn.textContent = 'ADD PHOTOS';
+        document.getElementById('uploadArea').querySelector('p').innerHTML =
+          '<strong>Tap to choose photos</strong><br>or drag and drop here — select as many as you want';
+      }, 2500);
     }
 
     // ========== GALLERY LOAD WITH DRAG-TO-REORDER ==========
