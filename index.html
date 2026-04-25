@@ -75,7 +75,7 @@
     --accent2: #7a0f14;
     --gold: #d4a24c;
     --cream: #f5ead3;
-    --bg: #f7f3ec;
+    --bg: #000000;
     --white: #ffffff;
     --text: #f0f0f0;
   }
@@ -581,6 +581,32 @@
   </div>
 </div>
 
+<!-- About Us Section -->
+<div class="content-section" id="aboutUsSection">
+  <div style="max-width:600px; margin:0 auto; padding:80px 20px 60px;">
+    <h1 style="color:#ffffff; font-family:'Bebas Neue',cursive; font-size:36px; letter-spacing:3px; text-align:center; margin-bottom:30px;">OUR SERVICES</h1>
+
+    <div style="background:linear-gradient(180deg,#1a1a1a 0%,#0f0f0f 100%); border-radius:10px; border-top:3px solid var(--accent); border-bottom:1px solid var(--gold); padding:22px 24px; margin-bottom:20px; box-shadow:0 4px 16px rgba(0,0,0,0.4);">
+      <h2 style="font-family:'Bebas Neue',cursive; color:var(--accent); letter-spacing:2px; font-size:22px; margin:0 0 10px;">✂ Men</h2>
+      <p style="color:#ccc; font-size:15px; line-height:1.7; margin:0;">Experience precision hairkuts, trendy fades, classic shaves, and expert beard grooming. Whether you're looking for a fresh style or a timeless look, our barbers have you covered.</p>
+    </div>
+
+    <div style="background:linear-gradient(180deg,#1a1a1a 0%,#0f0f0f 100%); border-radius:10px; border-top:3px solid var(--accent); border-bottom:1px solid var(--gold); padding:22px 24px; margin-bottom:20px; box-shadow:0 4px 16px rgba(0,0,0,0.4);">
+      <h2 style="font-family:'Bebas Neue',cursive; color:var(--accent); letter-spacing:2px; font-size:22px; margin:0 0 10px;">✂ Women</h2>
+      <p style="color:#ccc; font-size:15px; line-height:1.7; margin:0;">Indulge in our comprehensive hair services, from hairkuts and styling. We're here to help you look and feel your best for any occasion.</p>
+    </div>
+
+    <div style="background:linear-gradient(180deg,#1a1a1a 0%,#0f0f0f 100%); border-radius:10px; border-top:3px solid var(--accent); border-bottom:1px solid var(--gold); padding:22px 24px; margin-bottom:30px; box-shadow:0 4px 16px rgba(0,0,0,0.4);">
+      <h2 style="font-family:'Bebas Neue',cursive; color:var(--accent); letter-spacing:2px; font-size:22px; margin:0 0 10px;">✂ Children</h2>
+      <p style="color:#ccc; font-size:15px; line-height:1.7; margin:0;">We specialize in making your little ones feel at ease. Our friendly barbers provide gentle and fun hairkuts for children of all ages, including first hairkuts to make cherished memories.</p>
+    </div>
+
+    <div style="text-align:center;">
+      <button onclick="showSection('bookingSection')" style="background:var(--accent); color:var(--cream); font-family:'Bebas Neue',cursive; font-size:18px; letter-spacing:2px; padding:13px 32px; border:2px solid var(--gold); border-radius:8px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.5);">✂ BOOK YOUR KUT NOW</button>
+    </div>
+  </div>
+</div>
+
 <!-- Gallery Section -->
 <div class="content-section" id="gallerySection">
   <h1 style="color:#ffffff;">OUR KUTS</h1>
@@ -591,6 +617,7 @@
 <div class="menu" id="menu">
   <a class="home-page-btn" onclick="showSection('homeSection'); closeMenu();">HOME PAGE</a>
   <a onclick="showSection('walkInPriceSection'); closeMenu();">💰 Appointment Price List</a>
+  <a onclick="showSection('aboutUsSection'); closeMenu();">ℹ️ About Us</a>
 
   <div class="opening-hours">
     <h3>APPOINTMENTS &amp; WALK-INS:</h3>
@@ -2108,12 +2135,12 @@ const firebaseConfig = {
         const message = `✂️ NEW BOOKING\n\n🔢 Booking #: ${bookingNumber}\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Date: ${formattedDate}\n⏰ Time: ${time}\n💈 Service: ${services}${totalStr}`;
 
         const telegramBotToken = "8371174:AAH0S_dbWCylhZnCq99HF_r5lwCg-GBJrgQ";
-        const telegramChatId = "-10039585504";
+        const telegramChatId = "-1001003958550";
 
         fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: telegramChatId, text: message, parse_mode: "HTML" })
+          body: JSON.stringify({ chat_id: telegramChatId, text: message })
         }).catch(() => {}); // Telegram failure should never block confirmation
 
         document.querySelector("#bookingSection form").reset();
@@ -2253,7 +2280,7 @@ const firebaseConfig = {
         container.innerHTML += `
           <div style="background:#fff; border:1px solid #eee; padding:14px; margin-bottom:12px; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,0.06); border-left:4px solid var(--accent);">
             <div style="display:flex; justify-content:space-between; align-items:center;">
-              <strong style="font-size:15px;">${d.name}</strong>
+              <strong style="font-size:15px; color:#000;">${d.name}</strong>
               <small style="color:#aaa; font-style:italic;">${dateString}</small>
             </div>
             <div style="margin:4px 0; font-size:18px;">${stars}</div>
